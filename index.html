@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>DistroModifier</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="navbar-top.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <a class="navbar-brand" href="#">DistroModifier</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Schedule (OnConstruction)</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main role="main" class="container">
+        <div class="jumbotron">
+            <h1>DistroModifier</h1>
+            <p class="lead">Select your favorite Programs and Utilities and the Server will create a Custom LiveCD for you.</p>
+        </div>
+    </main>
+
+    <div class="container" id="distro_options">
+        <form method=POST action="http://deckedhost.ns0.it:8080/distro_creator">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="jumbotron">
+                        <h4>Browser:</h4>
+                        <br>
+                        <select name="browser">
+                        <option value="Firefox">
+                            Firefox
+                        </option>
+                        <option value="Chromium">
+                            Chromium
+                        </option>
+                    </select>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="jumbotron">
+                        <h4>Media Player:</h4>
+                        <br>
+                        <select name="media-player">
+                        <option value="VLC">
+                            VLC
+                        </option>
+                        <option value="MPV">
+                            MPV
+                        </option>
+                    </select>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-3">
+                    <div class="jumbotron">
+                        <h4>Email Client:</h4>
+                        <br>
+                        <select>
+                        <option value="Evolution">
+                            Evolution
+                        </option>
+                        <option value="Thunderbird">
+                            Thunderbird
+                        </option>
+                        <option value="Mutt">
+                            Mutt (Terminal)
+                        </option>
+                        <option value="Alpine">
+                            Alpine (Terminal)
+                        </option>
+                    </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script>
+        window.jQuery || document.write('<script src="js/vendor/jquery-slim.min.js"><\/script>')
+    </script>
+    <script src="js/vendor/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
