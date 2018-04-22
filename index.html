@@ -46,7 +46,9 @@
     </main>
 
     <div class="container" id="distro_options">
-        <form method=POST action="http://deckedhost.ns0.it:8080/distro_creator">
+        <form method=POST action="http://localhost:8080/distro_creator">
+
+            <!-- Browser WEB -->
             <div class="row">
                 <div class="col-md-3">
                     <div class="jumbotron">
@@ -63,6 +65,7 @@
                     </div>
                 </div>
 
+                <!-- Media Player -->
                 <div class="col-md-3">
                     <div class="jumbotron">
                         <h4>Media Player:</h4>
@@ -79,12 +82,12 @@
                 </div>
 
 
-
+                <!-- Email Client -->
                 <div class="col-md-3">
                     <div class="jumbotron">
                         <h4>Email Client:</h4>
                         <br>
-                        <select>
+                        <select name=email>
                         <option value="Evolution">
                             Evolution
                         </option>
@@ -100,7 +103,27 @@
                     </select>
                     </div>
                 </div>
+
+                <!-- Office Suite -->
+                <div class="col-md-3">
+                    <div class="jumbotron">
+                        <h4>Office Suite:</h4>
+                        <br>
+                        <select name=office>
+                        <option value="LibreOffice">
+                            Libre Office
+                        </option>
+                        <option value="LibreOffice">
+                            Libre Office
+                        </option>
+                    </select>
+                    </div>
+                </div>
+
+
             </div>
+
+            <input type=submit> Invia </input>
         </form>
     </div>
 
