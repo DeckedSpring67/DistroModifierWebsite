@@ -6,18 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
 
     <title>DistroModifier</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="navbar-top.css" rel="stylesheet">
 </head>
 
-<body>
+<body onload="">
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <a class="navbar-brand" href="#">DistroModifier</a>
@@ -46,7 +43,7 @@
     </main>
 
     <div class="container" id="distro_options">
-        <form method=POST action="http://localhost:8080/distro_creator">
+        <form id="formDistro">
 
             <!-- Browser WEB -->
             <div class="row">
@@ -55,10 +52,10 @@
                         <h4>Browser:</h4>
                         <br>
                         <select name="browser">
-                        <option value="Firefox">
+                        <option value="firefox">
                             Firefox
                         </option>
-                        <option value="Chromium">
+                        <option value="chromium">
                             Chromium
                         </option>
                     </select>
@@ -71,10 +68,10 @@
                         <h4>Media Player:</h4>
                         <br>
                         <select name="media-player">
-                        <option value="VLC">
+                        <option value="vlc">
                             VLC
                         </option>
-                        <option value="MPV">
+                        <option value="mpv">
                             MPV
                         </option>
                     </select>
@@ -88,17 +85,14 @@
                         <h4>Email Client:</h4>
                         <br>
                         <select name=email>
-                        <option value="Evolution">
+                        <option value="evolution">
                             Evolution
                         </option>
-                        <option value="Thunderbird">
+                        <option value="thunderbird">
                             Thunderbird
                         </option>
-                        <option value="Mutt">
+                        <option value="mutt">
                             Mutt (Terminal)
-                        </option>
-                        <option value="Alpine">
-                            Alpine (Terminal)
                         </option>
                     </select>
                     </div>
@@ -110,31 +104,96 @@
                         <h4>Office Suite:</h4>
                         <br>
                         <select name=office>
-                        <option value="LibreOffice">
-                            Libre Office
-                        </option>
-                        <option value="LibreOffice">
+                        <option value="libreoffice-fresh">
                             Libre Office
                         </option>
                     </select>
                     </div>
                 </div>
 
-
+                <!-- Desktop Environment -->
+                <div class="col-md-6">
+                    <div class="jumbotron">
+                        <h4>Desktop Environment / Window Manager:</h4>
+                        <br>
+                        <select style="width:100%;font-family:inherit;text-align:right;" name=de>
+                            <option value="i3-gaps">
+                                i3
+                            </option>
+                            <option value="gnome">
+                                Gnome
+                            </option>
+                        </select>
+                    </div>
+                </div>
             </div>
-
-            <input type=submit> Invia </input>
         </form>
+        <center>
+            <button id="bottone" value="Send Data" onclick="getDistroData()">Send Data</button>
+        </center>
+        <br>
+        <table>
+            <tr>
+                <td style="width:30%">
+                    <h1>Distro Status:</h1>
+                    <hr>
+                    <div id="distro_status">You must create a distro first</div>
+                </td>
+                <td style="width:30%">
+                    <br>
+                </td>
+                <td style="width:30%">
+                    <h1>Distro Percentage:</h1>
+                    <hr>
+                    <div id="distro_percentage">Latest distro in work is at: 0%</div>
+                </td>
+            </tr>
+        </table>
     </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script language="javascript" type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
     <script>
-        window.jQuery || document.write('<script src="js/vendor/jquery-slim.min.js"><\/script>')
+        var w;
+
+        function startWorker() {
+            if (typeof(Worker) !== "undefined") {
+                if (typeof(w) == "undefined") {
+                    w = new Worker("js/percentage.js");
+                }
+                w.onmessage = function(event) {
+                    document.getElementById("distro_percentage").innerHTML = event.data;
+                };
+            } else {
+                document.getElementById("distro_percentage").innerHTML = "Sorry, your browser does not support Web Workers...";
+            }
+        }
+
+        function stopWorker() {
+            w.terminate();
+            w = undefined;
+        }
+
+        function getDistroData() {
+            startWorker();
+            $("#distro_status").html("Waiting for response");
+            $.ajax({
+                type: "POST",
+                url: "http://deckedhost.ns0.it:8080/distro_creator",
+                data: $("#formDistro").serialize(), // serializes the form's elements.
+                success: function(data) {
+                    $("#distro_status").html(data); // show response from the php script.
+                },
+                error: function(data) {
+                    $("#distro_status").html("ERROR<br>");
+                }
+            });
+            stopWorker();
+        }
     </script>
-    <script src="js/vendor/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+
 </body>
 
 </html>
