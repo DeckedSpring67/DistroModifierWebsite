@@ -48,7 +48,7 @@ func createDistro(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()       //Parse url parameters passed, then parse the response packet for the POST body (request body)
 		fmt.Println(r.Form) // print information on server side.
 		//Initial name contains distro and date
-		programs := "xorg-server xterm xf86-video-intel xf86-video-nouveau xf86-video-amdgpu xf86-video-ati xf86-video-fbdev xf86-input-libinput xorg-xinit"
+		programs := "xorg-server xterm xf86-video-intel xf86-video-nouveau xf86-video-amdgpu xf86-video-ati xf86-video-fbdev xf86-input-libinput xorg-xinit "
 		name := fmt.Sprintf("arch-%s.", time.Now().Format("2006-01-02"))
 		currentname = name
 		percentage = "0%"
@@ -150,7 +150,7 @@ func getDistros(w http.ResponseWriter, r *http.Request) {
 		filenamearr := strings.Split(f.Name(), ".")
 		if len(filenamearr) > 2 {
 			if filenamearr[2] == "iso" {
-				fmt.Fprintf(w, "<a href=%s>%s</a>", f.Name(), f.Name())
+				fmt.Fprintf(w, "<a href=%s>%s</a><br>", f.Name(), f.Name())
 			}
 		}
 	}
@@ -173,7 +173,7 @@ func main() {
 	r.HandleFunc("/current_percentage", getPercentage)
 	r.HandleFunc("/getDistros", getDistros)
 
-	go refreshResponse()
+	//go refreshResponse()
 	log.Println("Server Started at port :8080")
 	handler := cors.Default().Handler(r)
 	log.Fatal(http.ListenAndServe(":8080", handler))
