@@ -48,7 +48,7 @@ func createDistro(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()       //Parse url parameters passed, then parse the response packet for the POST body (request body)
 		fmt.Println(r.Form) // print information on server side.
 		//Initial name contains distro and date
-		programs := "xorg-server xterm xf86-video-intel xf86-video-nouveau xf86-video-amdgpu xf86-video-ati xf86-video-fbdev xf86-input-libinput "
+		programs := "xorg-server xterm xf86-video-intel xf86-video-nouveau xf86-video-amdgpu xf86-video-ati xf86-video-fbdev xf86-input-libinput xorg-xinit"
 		name := fmt.Sprintf("arch-%s.", time.Now().Format("2006-01-02"))
 		currentname = name
 		percentage = "0%"
