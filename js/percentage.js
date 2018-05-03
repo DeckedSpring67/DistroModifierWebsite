@@ -1,4 +1,5 @@
-postMessage("Worker working");
+postMessage("Waiting for server");
+sendPOST();
 
 function sendPOST() {
     var request = new XMLHttpRequest();
@@ -11,4 +12,3 @@ function sendPOST() {
     request.send();
     setTimeout("sendPOST()", 500);
 }
-sendPOST();
