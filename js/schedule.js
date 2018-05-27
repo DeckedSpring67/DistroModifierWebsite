@@ -10,7 +10,7 @@ function sendPOST() {
             postMessage("The Server is down");
         }
     }
-    request.open("POST", "http://deckedhost.ns0.it:8080/current_percentage", true);
+    request.open("POST", "http://deckedhost.ns0.it:8080/get_schedule", true);
     request.send();
-    setTimeout("sendPOST()", 500);
+    setTimeout("sendPOST()", 10000);
 }

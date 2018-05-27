@@ -10,211 +10,280 @@
     <title>DistroModifier</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
 </head>
 
 <body onload="">
+    <!-- Floating button -->
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-        <a class="navbar-brand" href="#">DistroModifier</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Schedule (OnConstruction)</a>
-                </li>
-            </ul>
+
+    <div id="wrapper">
+
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <nav id="spy">
+                <ul class="sidebar-nav nav">
+                    <li class="sidebar-brand">
+                        <span class="fa fa-home solo" style="color:#e9ecef;font-size:2.3em">Schedule</span>
+                    </li>
+                    <li>
+                        <div id="schedule-content" style="color:lightgray"></div>
+                    </li>
+                </ul>
+            </nav>
         </div>
-    </nav>
 
-    <main role="main" class="container">
-        <div class="jumbotron">
-            <h1>DistroModifier</h1>
-            <p class="lead">Select your favorite Programs and Utilities and the Server will create a Custom LiveCD for you.</p>
-        </div>
-    </main>
 
-    <div class="container" id="distro_options">
-        <form id="formDistro">
+        <div id="page-content-wrapper">
+            <!--
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+                <h4><a class="navbar-brand" href="#">DistroModifier</a></h4>
+            </nav>
+            -->
 
-            <!-- Browser WEB -->
-            <div class="row">
-                <div class="col-md-3">
+            <!--Sidebar-->
+            <div class="page-content inset" data-spy="scroll" data-target="#spy">
+
+
+                <main role="main" class="container">
                     <div class="jumbotron">
-                        <h4>Browser:</h4>
-                        <br>
-                        <select name="browser">
-                        <option value="firefox">
-                            Firefox
-                        </option>
-                        <option value="chromium">
+                        <h1>DistroModifier</h1>
+                        <p class="lead">Select your favorite Programs and Utilities and the Server will create a Custom LiveCD for you.</p>
+                    </div>
+                </main>
+
+                <div class="container" id="distro_options">
+                    <form id="formDistro">
+
+                        <!-- Browser WEB -->
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="jumbotron">
+                                    <h4>Browser:</h4>
+                                    <br>
+                                    <input name="1" class="form-check-input" type="checkbox" id="firefox" value="firefox">
+                                    <label class="form-check-label checkbox-inline" for="firefox">Firefox</label><br>
+                                    <input name="2" class="form-check-input" type="checkbox" value="" id="chromium" value="chromium">
+                                    <label class="form-check-label checkbox-inline" for="chromium">
                             Chromium
-                        </option>
-                    </select>
-                    </div>
-                </div>
+                        </label><br>
+                                </div>
+                            </div>
 
-                <!-- Media Player -->
-                <div class="col-md-3">
-                    <div class="jumbotron">
-                        <h4>Media Player:</h4>
-                        <br>
-                        <select name="media-player">
-                        <option value="vlc">
+                            <!-- Media Player -->
+                            <div class="col-md-3">
+                                <div class="jumbotron">
+                                    <h4>Media Player:</h4>
+                                    <br>
+                                    <input name="3" class="form-check-input" type="checkbox" id="vlc" value="vlc">
+                                    <label class="form-check-label checkbox-inline" for="vlc">
                             VLC
-                        </option>
-                        <option value="mpv">
+                        </label><br>
+                                    <input name="4" class="form-check-input" type="checkbox" id="mpv" value="mpv">
+                                    <label class="form-check-label checkbox-inline" for="mpv">
                             MPV
-                        </option>
-                    </select>
-                    </div>
-                </div>
+                        </label><br>
+                                </div>
+                            </div>
 
 
-                <!-- Email Client -->
-                <div class="col-md-3">
-                    <div class="jumbotron">
-                        <h4>Email Client:</h4>
-                        <br>
-                        <select name=email>
-                        <option value="evolution">
+                            <!-- Email Client -->
+                            <div class="col-md-3">
+                                <div class="jumbotron">
+                                    <h4>Email Client:</h4>
+                                    <br>
+                                    <input name="5" class="form-check-input" type="checkbox" id="evolution" value="evolution">
+                                    <label class="form-check-label checkbox-inline" for="evolution">
+
                             Evolution
-                        </option>
-                        <option value="thunderbird">
+                        </label><br>
+                                    <input name="6" class="form-check-input" type="checkbox" id="thunderbird" value="thunderbird">
+                                    <label class="form-check-label checkbox-inline" for="thunderbird">
                             Thunderbird
-                        </option>
-                        <option value="mutt">
+                        </label><br>
+                                    <input name="7" class="form-check-input" type="checkbox" id="mutt" value="mutt">
+                                    <label class="form-check-label checkbox-inline" for="mutt">
                             Mutt (Terminal)
-                        </option>
-                    </select>
-                    </div>
-                </div>
+                        </label><br>
+                                </div>
+                            </div>
 
-                <!-- Office Suite -->
-                <div class="col-md-3">
-                    <div class="jumbotron">
-                        <h4>Office Suite:</h4>
-                        <br>
-                        <select name=office>
-                        <option value="libreoffice-fresh">
+                            <!-- Office Suite -->
+                            <div class="col-md-3">
+                                <div class="jumbotron">
+                                    <h4>Office Suite:</h4>
+                                    <br>
+                                    <input name="8" class="form-check-input" type="checkbox" id="libreoffice-fresh" value="libreoffice-fresh">
+                                    <label class="form-check-label checkbox-inline" for="libreoffice-fresh">
                             Libre Office
-                        </option>
-                    </select>
-                    </div>
-                </div>
+                        </label><br>
+                                </div>
+                            </div>
 
-                <!-- Desktop Environment -->
-                <div class="col-md-6">
+                            <!-- Desktop Environment -->
+                            <div class="col-md-6">
+                                <div class="jumbotron">
+                                    <h4>Desktop Environment / Window Manager:</h4>
+                                    <br>
+                                    <input name="9" class="form-check-input" type="checkbox" id="i3-gaps" value="i3-gaps">
+                                    <label class="form-check-label checkbox-inline" for="i3-gaps">
+                            i3
+                        </label><br>
+                                    <input name="10" class="form-check-input" type="checkbox" id="gnome" value="gnome">
+                                    <label class="form-check-label checkbox-inline" for="gnome">
+                            Gnome
+                        </label><br>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <center>
+                        <button class="btn" id="bottone" value="Send Data" onclick="getDistroData()">Send Data</button>
+                    </center>
+                    <br>
+                    <center>
+                        <table>
+                            <tr>
+                                <td style="width:100%">
+                                    <h1>Distro Status:</h1>
+                                    <hr>
+                                    <div id="distro_status">You must create a distro first</div>
+                                </td>
+                                <td style="width:30%">
+                                    <br>
+                                </td>
+                            </tr>
+                        </table>
+                    </center>
+                    <br>
+                    <br>
                     <div class="jumbotron">
-                        <h4>Desktop Environment / Window Manager:</h4>
-                        <br>
-                        <select style="width:100%;font-family:inherit;text-align:right;" name=de>
-                            <option value="i3-gaps">
-                                i3
-                            </option>
-                            <option value="gnome">
-                                Gnome
-                            </option>
-                        </select>
+                        <h1>Distros created:</h1>
+                        <div id="distros"></div>
                     </div>
                 </div>
             </div>
-        </form>
-        <center>
-            <button id="bottone" value="Send Data" onclick="getDistroData()">Send Data</button>
-        </center>
-        <br>
-        <table>
-            <tr>
-                <td style="width:30%">
-                    <h1>Distro Status:</h1>
-                    <hr>
-                    <div id="distro_status">You must create a distro first</div>
-                </td>
-                <td style="width:30%">
-                    <br>
-                </td>
-                <td style="width:30%">
-                    <h1>Distro Percentage:</h1>
-                    <hr>
-                    <span>Latest distro in work is at: </span>
-                    <div id="distro_percentage">0%</div>
-                </td>
-            </tr>
-        </table>
-        <br><br>
-        <div class="jumbotron">
-            <h1>Distros created:</h1>
-            <div id="distros"></div>
         </div>
-    </div>
-
-    <!-- Bootstrap core JavaScript
+        <!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script language="javascript" type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
-    <script>
-        var w;
-        getIso();
+        <!-- Placed at the end of the document so the pages load faster -->
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script language="javascript" type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+        <script>
+            //SIDEBAR
+            /*Menu-toggle*/
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("active");
+            });
 
-        function getIso() {
-            $.ajax({
-                type: "POST",
-                url: "http://deckedhost.ns0.it:8080/getDistros",
-                success: function(data) {
-                    $("#distros").html(data); // show response from the php script.
-                },
-                error: function(data) {
-                    $("#distros").html("ERROR<br>" + data.response);
+            /*Scroll Spy*/
+            /*
+                        $('body').scrollspy({
+                            target: '#spy',
+                            offset: 80
+                        });*/
+
+            /*Smooth link animation*/
+            $('a[href*=#]:not([href=#])').click(function() {
+                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+                    var target = $(this.hash);
+                    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                    if (target.length) {
+                        $('html,body').animate({
+                            scrollTop: target.offset().top
+                        }, 1000);
+                        return false;
+                    }
                 }
             });
-        }
 
-        function startWorker() {
-            if (typeof(Worker) !== "undefined") {
-                if (typeof(w) == "undefined") {
-                    w = new Worker("js/percentage.js");
-                    w.postMessage(null);
-                }
-                w.onmessage = function(event) {
-                    document.getElementById("distro_percentage").innerHTML = event.data;
-                };
-            } else {
-                document.getElementById("distro_percentage").innerHTML = "Sorry, your browser does not support Web Workers...";
+            //ISO CREATOR
+            //var wp;
+            var ws;
+            getIso();
+
+            function getIso() {
+                $.ajax({
+                    type: "POST",
+                    url: "http://deckedhost.ns0.it:8080/getDistros",
+                    success: function(data) {
+                        $("#distros").html(data); // show response from the php script.
+                    },
+                    error: function(data) {
+                        $("#distros").html("ERROR<br>" + data.response);
+                    }
+                });
             }
-        }
-
-        function stopWorker() {
-            w.terminate();
-            w = undefined;
-        }
-
-        startWorker();
-
-        function getDistroData() {
-            $("#distro_status").html("Waiting for response");
-            $.ajax({
-                type: "POST",
-                url: "http://deckedhost.ns0.it:8080/distro_creator",
-                data: $("#formDistro").serialize(), // serializes the form's elements.
-                success: function(data) {
-                    $("#distro_status").html(data); // show response from the php script.
-                },
-                error: function(data) {
-                    $("#distro_status").html("ERROR<br>");
+            //For Percentage
+            /*
+            function startPercentageWorker() {
+                if (typeof(Worker) !== "undefined") {
+                    if (typeof(wp) == "undefined") {
+                        wp = new Worker("js/percentage.js");
+                        wp.postMessage(null);
+                    }
+                    wp.onmessage = function(event) {
+                        document.getElementById("distro_percentage").innerHTML = event.data;
+                    };
+                } else {
+                    document.getElementById("distro_percentage").innerHTML =
+                        "Sorry, your browser does not support Web Workers...";
                 }
-            });
-        }
-    </script>
+            }
 
+            function stopPercentageWorker() {
+                wp.terminate();
+                wp = undefined;
+            }
+
+            startPercentageWorker();
+            */
+
+            // For schedule
+            function startScheduleWorker() {
+                if (typeof(Worker) !== "undefined") {
+                    if (typeof(ws) == "undefined") {
+                        ws = new Worker("js/schedule.js");
+                        ws.postMessage(null);
+                    }
+                    ws.onmessage = function(event) {
+                        document.getElementById("schedule-content").innerHTML = event.data;
+                    };
+                } else {
+                    document.getElementById("schedule-content").innerHTML =
+                        "Sorry, your browser does not support Web Workers...";
+                }
+            }
+
+            function stopScheduleWorker() {
+                ws.terminate();
+                ws = undefined;
+            }
+
+            startScheduleWorker();
+
+            //other
+
+            function getDistroData() {
+                $("#distro_status").html("Waiting for response");
+                $.ajax({
+                    type: "POST",
+                    url: "http://deckedhost.ns0.it:8080/distro_creator",
+                    data: $("#formDistro").serialize(), // serializes the form's elements.
+                    success: function(data) {
+                        $("#distro_status").html(data); // show response from the php script.
+                    },
+                    error: function(data) {
+                        $("#distro_status").html("ERROR<br>");
+                    }
+                });
+            }
+        </script>
 </body>
 
 </html>
