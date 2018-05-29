@@ -21,7 +21,8 @@ type distro struct {
 
 func startBuild() {
 	for true {
-		for _, d := range distros {
+		time.Sleep(10000 * time.Millisecond)
+		for i, d := range distros {
 			if d.created == false {
 				currentname = d.name
 				percentage = "20% (This will be long)"
@@ -43,6 +44,7 @@ func startBuild() {
 				log.Printf("Distro created")
 				fmt.Printf("End")
 				percentage = "100%, ready to take another job"
+				distros[i].created = true
 			}
 		}
 	}

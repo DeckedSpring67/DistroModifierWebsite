@@ -7,8 +7,8 @@ xorriso -as mkisofs \
   -isohybrid-mbr "isolinux/isohdpfx.bin" \
   -c "isolinux/boot.cat" \
   -b "isolinux/isolinux.bin" \
-  -A "ISOIMAGE" \
-  -volid "ISOIMAGE" \
+  -A "ARCH_201804" \
+  -volid "ARCH_201804" \
   -no-emul-boot \
   -boot-load-size 4 \
   -boot-info-table \
