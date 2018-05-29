@@ -17,7 +17,7 @@
 
 <body onload="">
     <!-- Floating button -->
-
+    <button type="button" class="btn" id="fixedbutton" style="z-index:40000;background-color:#373b41;color:white">Toggle Sidebar</button>
 
     <div id="wrapper">
 
@@ -30,7 +30,7 @@
                         <span class="fa fa-home solo" style="color:#e9ecef;font-size:2.3em">Schedule</span>
                     </li>
                     <li>
-                        <div id="schedule-content" style="color:lightgray"></div>
+                        <div class="container-fluid" id="schedule-content" style="color:lightgray"></div>
                     </li>
                 </ul>
             </nav>
@@ -49,7 +49,7 @@
 
 
                 <main role="main" class="container">
-                    <div class="jumbotron">
+                    <div class="jumbotron container-fluid">
                         <h1>DistroModifier</h1>
                         <p class="lead">Select your favorite Programs and Utilities and the Server will create a Custom LiveCD for you.</p>
                     </div>
@@ -158,7 +158,7 @@
 
                             <!-- Desktop Environment -->
                             <div class="col-md-6">
-                                <div class="jumbotron" style="height:25em">
+                                <div class="jumbotron" style="height:27em">
                                     <h4>Desktop Environment / Window Manager:</h4>
                                     <br>
                                     <input name="37" class="form-check-input" type="checkbox" id="i3-gaps" value="i3-gaps">
@@ -184,7 +184,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="jumbotron" style="height:25em">
+                                <div class="jumbotron" style="height:27em">
                                     <h4>Utilities:</h4>
                                     <br>
                                     <input name="53" class="form-check-input" type="checkbox" id="gparted" value="gparted">
@@ -257,7 +257,7 @@
                                     <input name="107" class="form-check-input" type="checkbox" id="vsftpd" value="vsftpd">
                                     <label class="form-check-label checkbox-inline" for="vsftpd">
                                         VSFTPD (FTP)
-                                    </label>
+                                    </label>F08080
                                     <br>
                                     <input name="109" class="form-check-input" type="checkbox" id="dovecot" value="dovecot">
                                     <label class="form-check-label checkbox-inline" for="dovecot">
@@ -312,20 +312,12 @@
                         <button class="btn" id="bottone" value="Send Data" onclick="getDistroData()">Send Data</button>
                     </center>
                     <br>
-                    <center>
-                        <table>
-                            <tr>
-                                <td style="width:100%">
-                                    <h1>Distro Status:</h1>
-                                    <hr>
-                                    <div id="distro_status">You must create a distro first</div>
-                                </td>
-                                <td style="width:30%">
-                                    <br>
-                                </td>
-                            </tr>
-                        </table>
-                    </center>
+                    <div class="col-md-12">
+                        <h1>Distro Creator Log:</h1>
+                        <hr>
+                        <div class="well well-sm container" id="distro_status" style="background-color:#282a2e;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;color:white">You must create a distro first</div>
+                        <br>
+                    </div>
                     <br>
                     <br>
                     <div class="jumbotron">
@@ -343,7 +335,7 @@
         <script>
             //SIDEBAR
             /*Menu-toggle*/
-            $("#menu-toggle").click(function(e) {
+            $("#fixedbutton").click(function(e) {
                 e.preventDefault();
                 $("#wrapper").toggleClass("active");
             });
