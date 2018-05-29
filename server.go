@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os/exec"
+	"strconv"
 	"strings"
 	"time"
 
@@ -59,28 +60,28 @@ func createDistro(w http.ResponseWriter, r *http.Request) {
 	//Initial name contains distro and date
 	programmi := "xorg-server xterm xf86-video-intel xf86-video-nouveau xf86-video-amdgpu xf86-video-ati xf86-video-fbdev xf86-input-libinput xorg-xinit "
 	name := fmt.Sprintf("arch-%s.", time.Now().Format("2006-01-02"))
-	currentname = name
 	// For every value in form we get the data and we put it into a struct, this will
 	// create an univoque name for the ISO
-	count := 0
-
 	if len(r.Form) > 0 {
+		mult := 1 //Multiplying each key (which is a prime number) to verify its non-duplicity. (Fundamental theorem of arithmetic)
 		for k, v := range r.Form {
-			count++
 			value := strings.Join(v, "")
-			fmt.Println("key:", k)
+			temp, _ := strconv.Atoi(k)
+			mult = mult * temp
 			fmt.Println("val:", value)
-			name += fmt.Sprintf("_%s", value)
-			fmt.Fprintf(w, "Programs selected:<br>%s:%s <br>", k, value)
+			fmt.Fprintf(w, "Programs selected:<br>%s,%s<br>", k, value)
 			programmi += value + " "
 		}
+		fmt.Fprintf(w, "Divide the second part of the ISO's name to check if a program is already inside<br>")
+		name = name + strconv.Itoa(mult)
+		currentname = name
 		fmt.Println(name)
 		found := checkDistro(name)
 		if !found {
 			distros = append(distros, distro{name: name, created: false, programs: programmi})
 			fmt.Fprintf(w, "Appending: %s to the schedule", name)
 		} else {
-			fmt.Fprintf(w, "Distro already in creation or existing, if there are some problems contact me at deckedspring@gmail.com")
+			fmt.Fprintf(w, "Distro already in creation or existing and is/will be located <a href=%s.iso>here</a>, if there are some problems contact me at deckedspring@gmail.com", name)
 		}
 	} else {
 		fmt.Println("Error parsing form data")
@@ -104,9 +105,9 @@ func checkDistro(name string) bool {
 func refreshResponse() {
 	response = "<br>Now Creating: <br>" + currentname + "<br>Status: " + percentage + "<br>"
 	for _, x := range distros {
-		created := "<span style=\"color:red\">false</span>"
+		created := "<span style=\"color:#FA8072\">false</span>"
 		if x.created {
-			created = "<span style=\"color:green\">true</span>"
+			created = "<span style=\"color:#90EE90\">true</span>"
 		}
 		response = fmt.Sprintf("%s<tr><td>%s<br>Created:&nbsp; %s</td></tr>\n", response, x.name, created)
 	}
