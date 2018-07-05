@@ -58,7 +58,7 @@ func createDistro(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()                         //Parse url parameters passed, then parse the response packet for the POST body (request body)
 	fmt.Printf("Appending: %s\n", r.Form) // print information on server side.
 	//Initial name contains distro and date
-	programmi := "xorg-server xterm xf86-video-intel xf86-video-nouveau xf86-video-amdgpu xf86-video-ati xf86-video-fbdev xf86-input-libinput xorg-xinit "
+	programmi := " "
 	name := fmt.Sprintf("arch-%s.", time.Now().Format("2006-01-02"))
 	// For every value in form we get the data and we put it into a struct, this will
 	// create an univoque name for the ISO
@@ -68,11 +68,11 @@ func createDistro(w http.ResponseWriter, r *http.Request) {
 			value := strings.Join(v, "")
 			temp, _ := strconv.Atoi(k)
 			mult = mult * temp
-			fmt.Println("val:", value)
-			fmt.Fprintf(w, "Programs selected:<br>%s,%s<br>", k, value)
+			fmt.Println("val", value)
+			fmt.Fprintf(w, "You selected:<br>%s,%s<br>", value, k)
 			programmi += value + " "
 		}
-		fmt.Fprintf(w, "Divide the second part of the ISO's name to check if a program is already inside<br>")
+		fmt.Fprintf(w, "Divide the second part of the ISO's name to check if a program is already instelled<br>")
 		name = name + strconv.Itoa(mult)
 		currentname = name
 		fmt.Println(name)

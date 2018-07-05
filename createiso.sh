@@ -4,6 +4,7 @@ CDIR=$(pwd)
 echo "Current Dir= $CDIR"
 rm -rf arch/x86_64/base/base-root
 xorriso -as mkisofs \
+  -iso-level 3 \
   -isohybrid-mbr "isolinux/isohdpfx.bin" \
   -c "isolinux/boot.cat" \
   -b "isolinux/isolinux.bin" \

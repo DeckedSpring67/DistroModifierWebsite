@@ -12,9 +12,12 @@ mount --rbind /dev/ dev/
 mount --rbind /sys/ sys/
 mount --rbind . .
 chroot . pacman -Syy --noconfirm
-chroot . systemctl enable gdm
 for x in $@
 do
+if (( $x == gnome ))
+then
+	chroot . systemctl enable gdm
+fi
 chroot . pacman -S $x --noconfirm
 done
 chroot . pacman -U linux-4.15.14-1-x86_64.pkg.tar.xz --noconfirm
