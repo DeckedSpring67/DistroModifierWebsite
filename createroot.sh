@@ -18,7 +18,9 @@ if (( $x == gnome ))
 then
 	chroot . systemctl enable gdm
 fi
-chroot . pacman -S $x --noconfirm
+chroot . pacman --noconfirm -S $x 
 done
 chroot . pacman -U linux-4.15.14-1-x86_64.pkg.tar.xz --noconfirm
+chroot . pacman -Scc
+chroot . chown -R live /home/live/
 

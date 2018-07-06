@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"math"
 
 	"github.com/rs/cors"
 )
@@ -56,24 +57,35 @@ func createDistro(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	r.ParseForm()                         //Parse url parameters passed, then parse the response packet for the POST body (request body)
+	if !canCreate(){
+		fmt.Fprintf(w, "Can't create more than 3 distros at once") 
+		return
+	}
 	fmt.Printf("Appending: %s\n", r.Form) // print information on server side.
-	//Initial name contains distro and date
+	//Sets a blank space for the program's container
 	programmi := " "
+	//Initial name contains distro and date
 	name := fmt.Sprintf("arch-%s.", time.Now().Format("2006-01-02"))
 	// For every value in form we get the data and we put it into a struct, this will
 	// create an univoque name for the ISO
 	if len(r.Form) > 0 {
-		mult := 1 //Multiplying each key (which is a prime number) to verify its non-duplicity. (Fundamental theorem of arithmetic)
-		for k, v := range r.Form {
+		var mult uint64
+		mult = 1
+ 		for k, v := range r.Form {
 			value := strings.Join(v, "")
+			value = checkInjection(value);
 			temp, _ := strconv.Atoi(k)
-			mult = mult * temp
+			if !isPrime(temp){
+				fmt.Fprintf(w, "A program's identifier is not a prime number, ABORTING") 
+				return
+			}
+			mult = mult * uint64(temp) //Multiplying each key (which is a prime number) to verify its non-duplicity. (Fundamental theorem of arithmetics)
 			fmt.Println("val", value)
 			fmt.Fprintf(w, "You selected:<br>%s,%s<br>", value, k)
 			programmi += value + " "
 		}
 		fmt.Fprintf(w, "Divide the second part of the ISO's name to check if a program is already instelled<br>")
-		name = name + strconv.Itoa(mult)
+		name = fmt.Sprintf("%s%d",name,mult)
 		currentname = name
 		fmt.Println(name)
 		found := checkDistro(name)
@@ -87,6 +99,42 @@ func createDistro(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Error parsing form data")
 		fmt.Fprintln(w, "Error parsing form data")
 	}
+}
+
+//Check if it's a prime number
+func isPrime(value int) bool {
+    for i := 2; i <= int(math.Floor(math.Sqrt(float64(value)))); i++ {
+        if value%i == 0 {
+            return false
+        }
+    }
+    return value > 1
+}
+
+
+func canCreate() bool{
+	count := 0
+	for _, x := range distros {
+		if !x.created{
+			count++	
+		}
+    }
+	return !(count > 3)
+}
+
+//To sanitize the input
+func checkInjection(value string) string {
+	//These characters can compromise the program string
+	specialChars := [17]string{";","<",">","|","&","`","$","@","(",")","{","}","[","]","*","%",","}	
+    for _, x := range specialChars {
+		index := strings.Index(value,x)
+		//If the index is found (> -1) then I delete everything that follows the character
+		if index > -1 {
+			partial := strings.Split(value,x) 
+			value = partial[0]
+		}
+	}
+	return value 
 }
 
 func checkDistro(name string) bool {
@@ -163,7 +211,7 @@ var currentname string
 func main() {
 	appendExistingDistros()
 	response = ""
-	percentage = "No distros to create yet"
+	percentage = "No distros created yet"
 	go startBuild()
 	r := http.NewServeMux()
 	r.HandleFunc("/get_schedule", getSchedule)
